@@ -38,8 +38,12 @@ module HStoreFlags
       end
       
       flags = []
-      args.each do |arg|
-        arg.is_a?Array ? flags += arg : flags << arg        
+      args.each do |arg| 
+        if arg.is_a?Array 
+          flags += arg 
+        else
+          flags << arg 
+        end
       end
 
       flags.each do |flag|
