@@ -37,16 +37,7 @@ module HStoreFlags
         const_set("AVAILABLE_#{field.upcase}", args)
       end
       
-      flags = []
-      args.each do |arg| 
-        if arg.is_a?Array 
-          flags += arg 
-        else
-          flags << arg 
-        end
-      end
-
-      flags.each do |flag|
+      args.flatten.each do |flag|
         define_method("#{flag}")      {(self[field] || {})[flag.to_s] == STORED_TRUE_VALUE}
         define_method("#{flag}?")     {(self[field] || {})[flag.to_s] == STORED_TRUE_VALUE}
         define_method("not_#{flag}")  {(self[field] || {})[flag.to_s] != STORED_TRUE_VALUE}
